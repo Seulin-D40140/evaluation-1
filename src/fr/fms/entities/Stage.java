@@ -1,0 +1,88 @@
+package fr.fms.entities;
+
+import java.util.ArrayList;
+
+public class Stage 
+{
+	private int id;
+	private String name;
+	private String description;
+	private int duration;
+	private String type;
+	private double price;
+	public ArrayList<Stage> stages = new ArrayList<Stage>();
+	
+	public Stage ( int id , String name , String description , int duration , String type , double price)
+	{
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.duration = duration;
+		this.type = type;
+		this.price = price;
+	}
+	
+	public Stage ( String name , String description , int duration , String type , double price)
+	{
+		this.name = name;
+		this.description = description;
+		this.duration = duration;
+		this.type = type;
+		this.price = price;
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	
+	public String toString()
+	{
+		return "Stage = name : " + getName() + " , description : " + getDescription() + " , duree : " + getDuration() + " , prix : " + getPrice();
+	}
+}

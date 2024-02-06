@@ -15,11 +15,11 @@ CREATE TABLE T_Stages
 ) ENGINE = InnoDB;
 
 INSERT INTO T_Stages ( Name , Description , Duration , Type , UnitaryPrice ) VALUES ( "Java" , "Java se8" , 20 , "presential" , 120 ),
-																			( "Java avancer" , "exeption fichier.." , 20 , "presential" , 150 ),
-																			( "Java" , "Java se8" , 20 , "remote" , 120 ),
-																			( "Spring" , "Spring core/mvc" , 30 , "presential" , 200 ),
-																			( "Php" , "symphony" , 15 , "remote" , 100 ),
-																			( "C#" , "dotnet core" , 25 , "presential" , 180 ),
-																			( "Javascript" , "js avancer" , 28 , "presential" , 230 ),
-																			( "Html" , "html simple" , 9 , "remote" , 90 ),
-																			( "Css" , "stylesheet" , 5 , "remote" , 50 );
+																					( "Java avancer" , "exeption fichier.." , 20 , "presential" , 150 ),
+																					( "Java" , "Java se8" , 20 , "remote" , 120 ),
+																					( "Spring" , "Spring core/mvc" , 30 , "presential" , 200 ),
+																					( "Php" , "symphony" , 15 , "remote" , 100 ),
+																					( "C#" , "dotnet core" , 25 , "presential" , 180 ),
+																					( "Javascript" , "js avancer" , 28 , "presential" , 230 ),
+																					( "Html" , "html simple" , 9 , "remote" , 90 ),
+																					( "Css" , "stylesheet" , 5 , "remote" , 50 );
