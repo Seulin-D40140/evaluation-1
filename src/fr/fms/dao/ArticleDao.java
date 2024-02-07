@@ -64,8 +64,6 @@ public class ArticleDao implements Dao<Stage>
 		}
 		return stage;
 	}
-
-	@Override
 	public void readAll() 
 	{
 		String strSql = "SELECT * FROM T_Stages"; 
@@ -87,7 +85,7 @@ public class ArticleDao implements Dao<Stage>
 			}
 			for(Stage a : stages)
 			{
-				System.out.println(a.getId() + " - " + a.getName() + " - "  + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
+				System.out.println(a.getId() + " - " + a.getName() + " - " + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
 			}
 		} 
 		catch (Exception e) 
@@ -145,37 +143,7 @@ public class ArticleDao implements Dao<Stage>
 		}	
 	}
 	
-	public Stage findOneStage(int idStage)
-	{
-		String strSqlAll = "select * from T_Stages where T_Stages.idStage = ? ";
-		Stage stage = null;
-		try(PreparedStatement statement = connection.prepareStatement(strSqlAll))
-		{
-			statement.setInt(1, idStage);
-			try(ResultSet resultSet = statement.executeQuery())
-			{ 
-				while(resultSet.next())
-				{
-					stage = new Stage(resultSet.getInt(1), resultSet.getString(2), 
-							resultSet.getString(3), resultSet.getInt(4), resultSet.getString(5) , resultSet.getDouble(6));
-					
-				}
-				
-			}
-			catch (Exception e) 
-			{
-				System.out.println(" erreur query dans la methode displayOne " + e );
-				e.printStackTrace();
-			}
-		}
-		catch (Exception e) 
-		{
-			System.out.println(" erreur methode displayOne article " + e );
-			e.printStackTrace();
-		}
-		return stage;
-	}
-	
+
 }
 
 

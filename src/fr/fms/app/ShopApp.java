@@ -20,17 +20,20 @@ public class ShopApp
 		buisness.showStages();
 		System.out.println("---------------------------------------------------------------");
 		int loopCount = 0;
+		double totalOrder = 0;
 		boolean continue1 = true;
 		
 		while (continue1)
 		{
 			String choice = null;
+
 			if (loopCount == 0)
 			{
 				System.out.println("\n que voulez vous faire ? : \n" +
 					" 1 - afficher un article , 2 - ajouter article au panier , 3 - voir panier , 4 - quitter");
 				choice = scan.nextLine();
 			}
+			
 			else
 			{
 				System.out.println("\n que voulez vous faire ? : \n" +
@@ -38,21 +41,23 @@ public class ShopApp
 				choice = scan.nextLine();
 			}
 			
-			
-			switch (Integer.parseInt(choice)) {
+			int parseChoice = Integer.parseInt(choice);
+			switch (parseChoice) {
 			case 1 :
 				loopCount++;
 				System.out.println("quel formation voulez vous voir ? : ");
 				String idStage = scan.nextLine();
+				int parseIdStage = Integer.parseInt(idStage);
 				System.out.println("*--------------------------------------------------------------------------------------------------*");
-				System.out.println (buisness.showStage(Integer.parseInt(idStage)));
+				System.out.println (buisness.showStage(parseIdStage));
 				System.out.println("*--------------------------------------------------------------------------------------------------* \n");
 				System.out.println("voulez vous ajouter l'article au panier ? : ");
 				String addArticleCartChoise = scan.nextLine();
 				
 				if (addArticleCartChoise.equalsIgnoreCase("O"))
 				{
-					buisness.addToCart(Integer.parseInt(idStage));
+					totalOrder += buisness.showStage(parseIdStage).getPrice();
+					buisness.addToCart(parseIdStage);
 				}
 				
 				break;
@@ -66,6 +71,7 @@ public class ShopApp
 					System.out.println("quel article ajouter au panier ? : ");
 					String addtocart = scan.nextLine();
 					buisness.addToCart(Integer.parseInt(addtocart));
+					totalOrder += buisness.showStage(Integer.parseInt(addtocart)).getPrice();
 					System.out.println("voulez vous en ajouter un autre ? : o/n");
 					String yesnoChoice = scan.nextLine();
 					
@@ -95,6 +101,7 @@ public class ShopApp
 					{
 						System.out.println( i + " " + buisness.showCart().get(i));
 					}
+					System.out.println(" total : " + totalOrder + " €");
 				}
 				System.out.println("*--------------------------------------------------------------------------------------------------* \n");
 				while ( continueCart)
@@ -106,17 +113,26 @@ public class ShopApp
 					case 1:
 						System.out.println("quel article souhaitez vous retirer ? (id article) : ");
 						String removeArticleChoice = scan.nextLine();
+						totalOrder -= buisness.cartList.get(Integer.parseInt(removeArticleChoice)).getPrice();
 						buisness.removeFromCart(Integer.parseInt(removeArticleChoice));
 						
 						System.out.println("*--------------------------------------------------------------------------------------------------*");
-						for( Stage k : buisness.showCart())
-						{	
-							
-							System.out.println(k);
+						if (buisness.cartList.size() > 0)
+						{
+							for( int i = 0 ; i < buisness.showCart().size() ; i++)
+							{
+								System.out.println( i + " " + buisness.showCart().get(i));
+							}
+							System.out.println("total : " + totalOrder + " €");
+						}
+						else 
+						{
+							System.out.println("VOTRE PANIER EST VIDE");
 						}
 						System.out.println("*--------------------------------------------------------------------------------------------------* \n");
 						break;
 					case 2 :
+						System.out.println("***************coming soon****************** \n");
 						break;
 					case 3 :
 						loopCount++;

@@ -10,21 +10,9 @@ public class TestEval {
 	{
 		ArticleDao artdao = new ArticleDao();
 		buisnessCart cart = new buisnessCart();
-		
-		Stage st = new Stage("js", "jvcrpt", 1500, "remote", 10);
-		cart.addToCart(3);
-		cart.addToCart(1);
-		cart.addToCart(5);
-		 for( Stage k : cart.cartList)
-		 {
-			 System.out.println(k);
-		 }
-		 cart.removeFromCart(1);
-		 System.out.println("***********************************");
-		 for( Stage k : cart.cartList)
-		 {
-			 System.out.println(k);
-		 }
+		double total = 0 ; 
+		total += cart.showStage(7).getPrice();
+		System.out.println(total);
 	}
 
 }
