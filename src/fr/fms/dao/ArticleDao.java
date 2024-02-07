@@ -35,10 +35,10 @@ public class ArticleDao implements Dao<Stage>
 	}
 	
 	@Override
-	public String readOne(int idStage)
+	public Stage readOne(int idStage)
 	{
 		String strSqlAll = "select * from T_Stages where T_Stages.idStage = ? ";
-		String stage = null;
+		Stage stage = null;
 		try(PreparedStatement statement = connection.prepareStatement(strSqlAll))
 		{
 			statement.setInt(1, idStage);
@@ -46,8 +46,8 @@ public class ArticleDao implements Dao<Stage>
 			{ 
 				while(resultSet.next())
 				{
-					stage = "Name : " + resultSet.getString(2) + " ,  Description : " + resultSet.getString(3) + 
-							" , type : " + resultSet.getString(5) + " , prix : " + resultSet.getDouble(6);
+					stage = new Stage(resultSet.getInt(1), resultSet.getString(2), 
+							resultSet.getString(3), resultSet.getInt(4), resultSet.getString(5) , resultSet.getDouble(6));
 				}
 				
 			}
@@ -87,7 +87,7 @@ public class ArticleDao implements Dao<Stage>
 			}
 			for(Stage a : stages)
 			{
-				System.out.println(a.getId() + " - " + a.getName() + " - " + a.getDescription() + " - " + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
+				System.out.println(a.getId() + " - " + a.getName() + " - "  + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
 			}
 		} 
 		catch (Exception e) 
@@ -143,6 +143,37 @@ public class ArticleDao implements Dao<Stage>
 			e.printStackTrace();
 		
 		}	
+	}
+	
+	public Stage findOneStage(int idStage)
+	{
+		String strSqlAll = "select * from T_Stages where T_Stages.idStage = ? ";
+		Stage stage = null;
+		try(PreparedStatement statement = connection.prepareStatement(strSqlAll))
+		{
+			statement.setInt(1, idStage);
+			try(ResultSet resultSet = statement.executeQuery())
+			{ 
+				while(resultSet.next())
+				{
+					stage = new Stage(resultSet.getInt(1), resultSet.getString(2), 
+							resultSet.getString(3), resultSet.getInt(4), resultSet.getString(5) , resultSet.getDouble(6));
+					
+				}
+				
+			}
+			catch (Exception e) 
+			{
+				System.out.println(" erreur query dans la methode displayOne " + e );
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e) 
+		{
+			System.out.println(" erreur methode displayOne article " + e );
+			e.printStackTrace();
+		}
+		return stage;
 	}
 	
 }

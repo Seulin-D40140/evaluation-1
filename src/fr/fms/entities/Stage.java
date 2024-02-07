@@ -81,6 +81,7 @@ public class Stage
 	
 	public String toString()
 	{
-		return "Stage = name : " + getName() + " , description : " + getDescription() + " , duree : " + getDuration() + " , prix : " + getPrice();
+		return "name : " + getName() + " , description : " + getDescription() + 
+			   " , duree : " + getDuration() + " , type : " + getType() + " , prix : " + getPrice();
 	}
 }

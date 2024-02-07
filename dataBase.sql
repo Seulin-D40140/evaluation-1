@@ -16,7 +16,7 @@ CREATE TABLE T_Stages
 
 INSERT INTO T_Stages ( Name , Description , Duration , Type , UnitaryPrice ) VALUES ( "Java" , "Java se8" , 20 , "presential" , 120 ),
 																					( "Java avancer" , "exeption fichier.." , 20 , "presential" , 150 ),
-																					( "Java" , "Java se8" , 20 , "remote" , 120 ),
+																					( "Java" , "Java se11" , 20 , "remote" , 160 ),
 																					( "Spring" , "Spring core/mvc" , 30 , "presential" , 200 ),
 																					( "Php" , "symphony" , 15 , "remote" , 100 ),
 																					( "C#" , "dotnet core" , 25 , "presential" , 180 ),
