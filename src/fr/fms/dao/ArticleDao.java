@@ -11,7 +11,6 @@ public class ArticleDao implements Dao<Stage>
 {
 	public ArrayList<Stage> stages = new ArrayList<Stage>();
 	
-	@Override
 	public void create(Stage obj)
 	{
 		String strSqlAdd = "INSERT INTO T_Stages (Name , Description , Duration , type , UnitaryPrice ) VALUES ( ? , ? , ? , ? , ? );";
@@ -36,10 +35,10 @@ public class ArticleDao implements Dao<Stage>
 	}
 	
 	@Override
-	public void readOne(int idStage)
+	public String readOne(int idStage)
 	{
 		String strSqlAll = "select * from T_Stages where T_Stages.idStage = ? ";
-		
+		String stage = null;
 		try(PreparedStatement statement = connection.prepareStatement(strSqlAll))
 		{
 			statement.setInt(1, idStage);
@@ -47,8 +46,10 @@ public class ArticleDao implements Dao<Stage>
 			{ 
 				while(resultSet.next())
 				{
-					System.out.println("ID : " + resultSet.getInt(1) + " ,  DESC : " + resultSet.getString(2) + " ,  MARQUE : " + resultSet.getString(3));
+					stage = "Name : " + resultSet.getString(2) + " ,  Description : " + resultSet.getString(3) + 
+							" , type : " + resultSet.getString(5) + " , prix : " + resultSet.getDouble(6);
 				}
+				
 			}
 			catch (Exception e) 
 			{
@@ -61,6 +62,7 @@ public class ArticleDao implements Dao<Stage>
 			System.out.println(" erreur methode displayOne article " + e );
 			e.printStackTrace();
 		}
+		return stage;
 	}
 
 	@Override
@@ -142,6 +144,7 @@ public class ArticleDao implements Dao<Stage>
 		
 		}	
 	}
+	
 }
 
 

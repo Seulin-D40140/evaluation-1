@@ -1,6 +1,5 @@
 package fr.fms.entities;
 
-import java.util.ArrayList;
 
 public class Stage 
 {
@@ -10,7 +9,6 @@ public class Stage
 	private int duration;
 	private String type;
 	private double price;
-	public ArrayList<Stage> stages = new ArrayList<Stage>();
 	
 	public Stage ( int id , String name , String description , int duration , String type , double price)
 	{
