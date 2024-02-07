@@ -13,6 +13,7 @@ public class TestEval {
 		double total = 0 ; 
 		total += cart.showStage(7).getPrice();
 		System.out.println(total);
+		System.out.println("12".chars().allMatch(Character::isDigit));
 	}
 
 }
