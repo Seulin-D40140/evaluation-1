@@ -38,4 +38,9 @@ public class buisnessCart implements Buisness<Stage>
 	{
 		return artdao.readOne(id);
 	}
+
+	public ArrayList<Stage> stageList ()
+	{
+		return artdao.stages;
+	}
 }

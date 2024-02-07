@@ -6,11 +6,11 @@ public class Customer
 	private String name;
 	private String firstName;
 	private String email;
-	private String phone;
+	private int phone;
 	private String address;
 	private int idUser;
 	
-	public Customer(int idCustomer, String name, String firstName, String email, String phone, String address, int idUser) {
+	public Customer(int idCustomer, String name, String firstName, String email, int phone, String address, int idUser) {
 		super();
 		this.idCustomer = idCustomer;
 		this.name = name;
@@ -21,7 +21,7 @@ public class Customer
 		this.idUser = idUser;
 	}
 	
-	public Customer(String name, String firstName, String email, String phone, String address, int idUser) {
+	public Customer(String name, String firstName, String email, int phone, String address, int idUser) {
 		super();
 		this.name = name;
 		this.firstName = firstName;
@@ -31,7 +31,7 @@ public class Customer
 		this.idUser = idUser;
 	}
 	
-	public Customer(String name, String firstName, String email, String phone, String address) {
+	public Customer(String name, String firstName, String email, int phone, String address) {
 		this.name = name;
 		this.firstName = firstName;
 		this.email = email;
@@ -71,11 +71,11 @@ public class Customer
 		this.email = email;
 	}
 
-	public String getPhone() {
+	public int getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 
@@ -96,6 +96,6 @@ public class Customer
 	}
 	
 	public String toString() {
-		return " " + name + " , " + firstName + " , " + email + " , " + phone + " , " + address;
+		return getName() + " , " + getFirstName() + " , " + getEmail() + " , " + getPhone() + " , " + getAddress();
 	}
 }

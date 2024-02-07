@@ -37,7 +37,7 @@ CREATE TABLE T_Customers
 (
 	idCustomer			int(4)		PRIMARY KEY AUTO_INCREMENT,
 	Name			varchar(20)		NOT NULL,
-	LastName		varchar(20)		NOT NULL,
+	FirstName		varchar(20)		NOT NULL,
 	Email 			varchar(50)		NOT NULL,
 	Phone			int(10)			NOT NULL,
 	Adress			varchar(50)		NOT NULL
