@@ -27,6 +27,8 @@ public class ShopApp
 		boolean isNumberRemoveChoice = false;
 		boolean isNumberOneFormation = false;
 		boolean isNumberAddToCart = false;
+		boolean wrongId = false;
+		
 		
 		System.out.println("**********************************");
 		System.out.println("+            bonjour             +");
@@ -207,35 +209,40 @@ public class ShopApp
 							
 							break;
 						case 2 :
-							System.out.println("***************coming soon****************** \n");
+//							System.out.println("***************coming soon****************** \n");
 							System.out.println("voulez vous vous connecter = 1 , ou cree un compre ? = 2 :");
 							String connectORcreate = scan.nextLine();
+							
 							switch (connectORcreate) 
 							{
 							case "1" :
-								System.out.println("--- entrez votre login : ---");
-								String login = scan.nextLine();
-								System.out.println("--- entrez votre password : ---");
-								String password = scan.nextLine();
-								String resulAccount = null;
-								
-								for( User user : buisness.showUsers())
+								while ( wrongId == false)
 								{
-									if(!user.getLogin().equals(login))
+									System.out.println("--- entrez votre login : ---");
+									String login = scan.nextLine();
+									System.out.println("--- entrez votre password : ---");
+									String password = scan.nextLine();
+									String resulAccount = null;
+									
+									for( User user : buisness.showUsers())
 									{
-										resulAccount =  "login incorrect"; 
-										
+										if(!user.getLogin().equals(login))
+										{
+											resulAccount =  "login incorrect"; 
+										}
+										else if(user.getLogin().equals(login) && !user.getPassword().equals(password))
+										{
+											resulAccount = "mot de passe incorrect";
+										}
+										else 
+										{
+											wrongId = true;
+											resulAccount = "bienvenue " + user.getLogin();
+										}
 									}
-									else if(user.getLogin().equals(login) && !user.getPassword().equals(password))
-									{
-										resulAccount = "mot de passe incorrect";
-									}
-									else 
-									{
-										resulAccount = "bienvenue " + user.getLogin();
-									}
+									System.out.println(resulAccount);
 								}
-								System.out.println(resulAccount);
+								
 								break;
 							case "2" :
 								
