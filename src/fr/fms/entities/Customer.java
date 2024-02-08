@@ -96,6 +96,6 @@ public class Customer
 	}
 	
 	public String toString() {
-		return getName() + " , " + getFirstName() + " , " + getEmail() + " , " + getPhone() + " , " + getAddress();
+		return "name : "+getName() + " , firstname : " + getFirstName() + " , mail : " + getEmail() + " , phone : " + getPhone() + " , adress : " + getAddress();
 	}
 }

@@ -43,8 +43,9 @@ CREATE TABLE T_Customers
 	Adress			varchar(50)		NOT NULL
 ) ENGINE = InnoDB;
 
-INSERT INTO T_Customers ( Name , LastName , Email , Phone , Adress ) VALUES ( "toto" , "tara" , "TaraT@hotmail.fr" , 0568542582 , "12 rue des roses 40260 dax");
+INSERT INTO T_Customers ( Name , FirstName , Email , Phone , Adress ) VALUES ( "toto" , "tara" , "TaraT@hotmail.fr" , 0568542582 , "12 rue des roses 40260 dax");
 
-ALTER TABLE t_Users ADD COLUMN idCustomer INT(4);
-ALTER TABLE t_Users ADD FOREIGN KEY(idCustomer) REFERENCES T_Customers(idCustomer);
-update t_Users set idCustomer=1 where idUser=1;
+ALTER TABLE t_Users ADD COLUMN idPerson INT(4);
+ALTER TABLE t_Users ADD FOREIGN KEY(idPerson) REFERENCES T_Customers(idCustomer);
+update t_Users set idPerson=1 where idUser=1;
+

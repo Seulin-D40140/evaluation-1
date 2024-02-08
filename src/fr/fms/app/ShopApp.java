@@ -20,6 +20,7 @@ public class ShopApp
 		int loopCount = 0;
 		double totalOrder = 0;
 		boolean continue1 = true;
+		boolean continueCart = true;
 		String  choice = null;
 		int parseChoice = 0;
 		boolean isNumber = false;
@@ -46,7 +47,7 @@ public class ShopApp
 			if (loopCount == 0)
 			{
 				System.out.println("\n que voulez vous faire ? : \n" +
-					" 1 - afficher un article , 2 - ajouter article au panier , 3 - voir panier , 4 - quitter");
+					" 1 - afficher un article , 2 - ajouter plusieurs au article au panier , 3 - voir panier , 4 - quitter");
 				choice = scan.nextLine();
 				isNumber = choice.chars().allMatch(Character::isDigit);
 				
@@ -96,7 +97,7 @@ public class ShopApp
 				System.out.println("*--------------------------------------------------------------------------------------------------*");
 				System.out.println (buisness.showStage(parseIdStage));
 				System.out.println("*--------------------------------------------------------------------------------------------------* \n");
-				System.out.println("voulez vous ajouter l'article au panier ? : o = oui");
+				System.out.println("voulez vous ajouter l'article au panier ? : o = oui , autre = non ");
 				String addArticleCartChoise = scan.nextLine();
 				
 				if (addArticleCartChoise.equalsIgnoreCase("O"))
@@ -129,7 +130,7 @@ public class ShopApp
 					
 					buisness.addToCart(Integer.parseInt(addtocart));
 					totalOrder += buisness.showStage(Integer.parseInt(addtocart)).getPrice();
-					System.out.println("voulez vous en ajouter un autre ? : n = non ");
+					System.out.println("voulez vous en ajouter un autre ? : n = non , autre = oui");
 					String yesnoChoice = scan.nextLine();
 					
 					if(yesnoChoice.equalsIgnoreCase("N"))
@@ -146,7 +147,7 @@ public class ShopApp
 				break;
 			case 3 :
 				loopCount++;
-				boolean continueCart = true;
+				
 				System.out.println("*--------------------------------------------------------------------------------------------------*");
 				if(buisness.cartList.size() == 0)
 				{
@@ -224,6 +225,7 @@ public class ShopApp
 									String password = scan.nextLine();
 									String resulAccount = null;
 									
+									
 									for( User user : buisness.showUsers())
 									{
 										if(!user.getLogin().equals(login))
@@ -237,15 +239,49 @@ public class ShopApp
 										else 
 										{
 											wrongId = true;
-											resulAccount = "bienvenue " + user.getLogin();
+											resulAccount = "+----------------------~ bienvenue " + user.getLogin() + " ~----------------------+ \n";
 										}
 									}
 									System.out.println(resulAccount);
+									
+									System.out.println("PANIER : ");
+									for( int i = 0 ; i < buisness.showCart().size() ; i++)
+									{
+										System.out.println( "id : " + i + " ,  " + buisness.showCart().get(i));
+									}
+									System.out.println("total : " + totalOrder + " € \n");
+									
+									System.out.println("validez votre panier ? : O/N");
+									String cartValidate = scan.nextLine();
+									switch (cartValidate) 
+									{
+									case "o":
+										int iduser = 0;
+										for( User user : buisness.showUsers())
+										{
+											if( user.getLogin().equals(login))
+											{
+												iduser = user.getIdUser();
+											}
+										}
+										System.out.println("validate");
+										System.out.println("commande prise en compte et envoyer a ces coordonees : ");
+										System.out.println("++++ " + buisness.showCustomer(iduser) + " ++++");
+										buisness.cartList.clear();
+										continueCart = false;
+										
+										break;
+									case "n":
+										continueCart = false;
+										break;
+									default:
+										break;
+									}
 								}
 								
 								break;
 							case "2" :
-								
+								System.out.println("-**************** coming soon ********************-");
 								break;
 							default:
 								break;
