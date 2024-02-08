@@ -1,11 +1,9 @@
 package fr.fms.app;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.jar.Attributes.Name;
 
 import fr.fms.buisness.buisnessCart;
-import fr.fms.dao.ArticleDao;
-import fr.fms.dao.UserDao;
+import fr.fms.entities.Customer;
 import fr.fms.entities.Stage;
 import fr.fms.entities.User;
 
@@ -217,23 +215,26 @@ public class ShopApp
 							switch (connectORcreate) 
 							{
 							case "1" :
+								String resulAccount = null;
+								String login = null;
+								String password = null;
 								while ( wrongId == false)
 								{
 									System.out.println("--- entrez votre login : ---");
-									String login = scan.nextLine();
+									login = scan.nextLine();
 									System.out.println("--- entrez votre password : ---");
-									String password = scan.nextLine();
-									String resulAccount = null;
-									
+									password = scan.nextLine();
 									
 									for( User user : buisness.showUsers())
 									{
 										if(!user.getLogin().equals(login))
 										{
+											wrongId = false;
 											resulAccount =  "login incorrect"; 
 										}
 										else if(user.getLogin().equals(login) && !user.getPassword().equals(password))
 										{
+											wrongId = false;
 											resulAccount = "mot de passe incorrect";
 										}
 										else 
@@ -243,58 +244,84 @@ public class ShopApp
 										}
 									}
 									System.out.println(resulAccount);
-									
-									System.out.println("PANIER : ");
-									for( int i = 0 ; i < buisness.showCart().size() ; i++)
-									{
-										System.out.println( "id : " + i + " ,  " + buisness.showCart().get(i));
-									}
-									System.out.println("total : " + totalOrder + " € \n");
-									
-									System.out.println("validez votre panier ? : O/N");
-									String cartValidate = scan.nextLine();
-									switch (cartValidate) 
-									{
-									case "o":
-										int iduser = 0;
-										for( User user : buisness.showUsers())
-										{
-											if( user.getLogin().equals(login))
-											{
-												iduser = user.getIdUser();
-											}
-										}
-										System.out.println("validate");
-										System.out.println("commande prise en compte et envoyer a ces coordonees : ");
-										System.out.println("++++ " + buisness.showCustomer(iduser) + " ++++");
-										buisness.cartList.clear();
-										continueCart = false;
-										
-										break;
-									case "n":
-										continueCart = false;
-										break;
-									default:
-										break;
-									}
 								}
 								
-								break;
-							case "2" :
-								System.out.println("-**************** coming soon ********************-");
-								break;
-							default:
-								break;
-							}
+								System.out.println("*--------------------------------------------------------------------------------------------------*");
+								System.out.println("PANIER : ");
+								for( int i = 0 ; i < buisness.showCart().size() ; i++)
+								{
+									System.out.println( "id : " + i + " ,  " + buisness.showCart().get(i));
+								}
+								System.out.println("total : " + totalOrder + " € \n");
+								System.out.println("*--------------------------------------------------------------------------------------------------* \n");
+								
+								System.out.println("validez votre panier ? : O/N");
+								String cartValidate = scan.nextLine();
+								switch (cartValidate) 
+								{
+								case "o":
+									int iduser = 0;
+									for( User user : buisness.showUsers())
+									{
+										if( user.getLogin().equals(login))
+										{
+											iduser = user.getIdUser();
+										}
+									}
+									System.out.println("++-------** validate **-------++");
+									System.out.println("**---------++ commande prise en compte et envoyer a ces coordonees : ++-------**");
+									System.out.println("+-+-+-+ " + buisness.showCustomer(iduser) + " +-+-+-+");
+									buisness.cartList.clear();
+									continueCart = false;
+									
+									break;
+								case "n":
+									continueCart = false;
+									break;
+								default:
+									break;
+								}
+							
 							
 							break;
-						case 3 :
-							continueCart = false;
-							
+						case "2" :
+							String name = null;
+							String firstname =null;
+							String email = null;
+							String adress = null;
+							String phone = null;
+							String logincreate = null;
+							String passwordcreate = null;
+							System.out.println("entrez votre nom : ");
+							name = scan.nextLine();
+							System.out.println("entrez votre premnom : ");
+							firstname = scan.nextLine();
+							System.out.println("entrez votre email : ");
+							email = scan.nextLine();
+							System.out.println("entrez votre adress : ");
+							adress = scan.nextLine();
+							System.out.println("entrez votre n° de telephone : ");
+							phone = scan.nextLine();
+							int parsePhone = Integer.parseInt(phone);
+							buisness.createInfos(new Customer(name, firstname, email, parsePhone, adress));
+							System.out.println("\n entrez votre login : ");
+							logincreate = scan.nextLine();
+							System.out.println("entrez votre mot dde passe : ");
+							passwordcreate = scan.nextLine();
+							buisness.userCreate(new User(logincreate, passwordcreate));
 							break;
 						default:
-							
 							break;
+						}
+						
+						break;
+					case 3 :
+						continueCart = false;
+						
+						break;
+					default:
+						
+						break;
 					}
 				}
 				

@@ -143,7 +143,6 @@ public class ArticleDao implements Dao<Stage>
 		}	
 	}
 	
-
 }
 
 

@@ -14,7 +14,7 @@ public class CustomerDao implements Dao<Customer>
 	@Override
 	public void create(Customer obj) 
 	{
-		String str = "INSERT INTO T_Customerss ( Name , FirstName , Email , Phone , Adress ) VALUES ( ? , ? , ? , ? , ? );";
+		String str = "INSERT INTO T_Customers ( Name , FirstName , Email , Phone , Adress ) VALUES ( ? , ? , ? , ? , ? );";
 		
 		try(PreparedStatement ps = connection.prepareStatement(str))
 		{

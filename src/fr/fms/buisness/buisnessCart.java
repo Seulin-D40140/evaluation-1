@@ -63,4 +63,9 @@ public class buisnessCart implements Buisness<Stage>
 	{
 		return customerdao.readOne(iduser);
 	}
+
+	public void createInfos(Customer obj)
+	{
+		customerdao.create(obj);
+	}
 }
