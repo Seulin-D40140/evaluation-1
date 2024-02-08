@@ -64,7 +64,8 @@ public class ArticleDao implements Dao<Stage>
 		}
 		return stage;
 	}
-	public void readAll() 
+	
+	public ArrayList<Stage> readAll() 
 	{
 		String strSql = "SELECT * FROM T_Stages"; 
 		
@@ -72,6 +73,7 @@ public class ArticleDao implements Dao<Stage>
 		{
 			try(ResultSet resultSet = statement.executeQuery(strSql))
 			{ 
+				stages.clear();
 				while( resultSet.next())
 				{
 					int rsID = resultSet.getInt(1);
@@ -80,12 +82,9 @@ public class ArticleDao implements Dao<Stage>
 					int rsDuration = resultSet.getInt(4);
 					String rsType= resultSet.getString(5);
 					Double rsPrice = resultSet.getDouble(6);
+					
 					stages.add(new Stage(rsID , rsName , rsDescription , rsDuration , rsType , rsPrice));
 				}
-			}
-			for(Stage a : stages)
-			{
-				System.out.println(a.getId() + " - " + a.getName() + " - " + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
 			}
 		} 
 		catch (Exception e) 
@@ -93,6 +92,7 @@ public class ArticleDao implements Dao<Stage>
 			System.out.println(" erreur methode display article " + e );
 			e.printStackTrace();
 		}
+		return stages;
 	}
 
 	@Override

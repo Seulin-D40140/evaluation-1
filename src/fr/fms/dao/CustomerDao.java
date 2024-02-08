@@ -1,6 +1,5 @@
 package fr.fms.dao;
 
-import java.awt.dnd.peer.DropTargetPeer;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
@@ -9,6 +8,7 @@ import fr.fms.entities.Customer;
 public class CustomerDao implements Dao<Customer>
 {
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
+	
 	@Override
 	public void create(Customer obj) 
 	{
@@ -40,9 +40,9 @@ public class CustomerDao implements Dao<Customer>
 	}
 
 	@Override
-	public void readAll() 
+	public ArrayList<Customer> readAll() 
 	{
-		
+		return null;
 	}
 
 	@Override

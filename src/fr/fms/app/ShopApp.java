@@ -1,16 +1,22 @@
 package fr.fms.app;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.jar.Attributes.Name;
 
 import fr.fms.buisness.buisnessCart;
 import fr.fms.dao.ArticleDao;
+import fr.fms.dao.UserDao;
 import fr.fms.entities.Stage;
+import fr.fms.entities.User;
 
 public class ShopApp 
 {
 	public static void main(String[] args) 
 	{
+		
 		Scanner scan = new Scanner(System.in);
 		buisnessCart buisness = new buisnessCart();
+		System.out.println(buisness.showUsers());
 		int loopCount = 0;
 		double totalOrder = 0;
 		boolean continue1 = true;
@@ -20,13 +26,17 @@ public class ShopApp
 		boolean isNumberCartChoice = false;
 		boolean isNumberRemoveChoice = false;
 		boolean isNumberOneFormation = false;
+		boolean isNumberAddToCart = false;
 		
 		System.out.println("**********************************");
 		System.out.println("+            bonjour             +");
 		System.out.println("**********************************\n");
 		
 		System.out.println("+-------------------- voici nos formations -------------------+");
-		buisness.showStages();
+		for(Stage a : buisness.showStages())
+		{
+			System.out.println(a.getId() + " - " + a.getName() + " - " + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
+		}
 		System.out.println("---------------------------------------------------------------");
 		
 		while (continue1)
@@ -50,14 +60,14 @@ public class ShopApp
 			else
 			{
 				System.out.println("\n que voulez vous faire ? : \n" +
-						" 1 - afficher un article , 2 - ajouter article au panier , 3 - voir panier , 4 - quitter , 5 - voir tout les articles");
+						" 1 - afficher un article , 2 - ajouter article au panier , 3 - voir panier , 4 - quitter , \n 5 - voir tout les articles");
 				choice = scan.nextLine();
 				isNumber = choice.chars().allMatch(Character::isDigit);
 				
 				while (isNumber == false || (Integer.parseInt(choice) > 5 || Integer.parseInt(choice) < 1))
 				{
 					System.out.println("\n que voulez vous faire ? : \n" +
-							" 1 - afficher une formation , 2 - ajouter formation au panier , 3 - voir panier , 4 - quitter , 5 - voir toutes les formations");
+							" 1 - afficher une formation , 2 - ajouter formation au panier , 3 - voir panier , 4 - quitter , \n  5 - voir toutes les formations");
 						choice = scan.nextLine();
 						isNumber = choice.chars().allMatch(Character::isDigit);
 				}
@@ -71,7 +81,9 @@ public class ShopApp
 				System.out.println("quel formation voulez vous voir ? : ");
 				String idStage = scan.nextLine();
 				isNumberOneFormation = idStage.chars().allMatch(Character::isDigit);
-				while (isNumberOneFormation == false || (Integer.parseInt(idStage) > buisness.stageList() .size()|| Integer.parseInt(idStage) < 1))
+				
+				
+				while (isNumberOneFormation == false || (Integer.parseInt(idStage) > buisness.stageList().size() || Integer.parseInt(idStage) < 1))
 				{
 					System.out.println("quel formation voulez vous voir ? : ");
 					idStage = scan.nextLine();
@@ -82,7 +94,7 @@ public class ShopApp
 				System.out.println("*--------------------------------------------------------------------------------------------------*");
 				System.out.println (buisness.showStage(parseIdStage));
 				System.out.println("*--------------------------------------------------------------------------------------------------* \n");
-				System.out.println("voulez vous ajouter l'article au panier ? : ");
+				System.out.println("voulez vous ajouter l'article au panier ? : o = oui");
 				String addArticleCartChoise = scan.nextLine();
 				
 				if (addArticleCartChoise.equalsIgnoreCase("O"))
@@ -96,15 +108,26 @@ public class ShopApp
 				loopCount++;
 				Boolean continueadd = true;
 				System.out.println("+------------------------- formations ------------------------+");
-				buisness.showStages();
+				for(Stage a : buisness.showStages())
+				{
+					System.out.println(a.getId() + " - " + a.getName() + " - " + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
+				}
 				System.out.println("--------------------------------------------------------------- \n");
 				while(continueadd)
 				{
 					System.out.println("quel article ajouter au panier ? : ");
 					String addtocart = scan.nextLine();
+					isNumberAddToCart = addtocart.chars().allMatch(Character::isDigit);
+					while (isNumberAddToCart == false || (Integer.parseInt(addtocart) > buisness.stageList().size() || Integer.parseInt(addtocart) < 1))
+					{
+						System.out.println("quel article ajouter au panier ? : ");
+						addtocart = scan.nextLine();
+						isNumberAddToCart = addtocart.chars().allMatch(Character::isDigit);
+					}
+					
 					buisness.addToCart(Integer.parseInt(addtocart));
 					totalOrder += buisness.showStage(Integer.parseInt(addtocart)).getPrice();
-					System.out.println("voulez vous en ajouter un autre ? : o/n");
+					System.out.println("voulez vous en ajouter un autre ? : n = non ");
 					String yesnoChoice = scan.nextLine();
 					
 					if(yesnoChoice.equalsIgnoreCase("N"))
@@ -185,6 +208,41 @@ public class ShopApp
 							break;
 						case 2 :
 							System.out.println("***************coming soon****************** \n");
+							System.out.println("voulez vous vous connecter = 1 , ou cree un compre ? = 2 :");
+							String connectORcreate = scan.nextLine();
+							switch (connectORcreate) 
+							{
+							case "1" :
+								System.out.println("--- entrez votre login : ---");
+								String login = scan.nextLine();
+								System.out.println("--- entrez votre password : ---");
+								String password = scan.nextLine();
+								String resulAccount = null;
+								
+								for( User user : buisness.showUsers())
+								{
+									if(!user.getLogin().equals(login))
+									{
+										resulAccount =  "login incorrect"; 
+										
+									}
+									else if(user.getLogin().equals(login) && !user.getPassword().equals(password))
+									{
+										resulAccount = "mot de passe incorrect";
+									}
+									else 
+									{
+										resulAccount = "bienvenue " + user.getLogin();
+									}
+								}
+								System.out.println(resulAccount);
+								break;
+							case "2" :
+								
+								break;
+							default:
+								break;
+							}
 							
 							break;
 						case 3 :
@@ -205,7 +263,10 @@ public class ShopApp
 				break;
 			case 5 :
 				System.out.println("+-------------------- voici nos formations -------------------+");
-				buisness.showStages();
+				for(Stage a : buisness.showStages())
+				{
+					System.out.println(a.getId() + " - " + a.getName() + " - " + a.getDuration() + " - " + a.getType() + " - " + a.getPrice());
+				}
 				System.out.println("---------------------------------------------------------------");
 				break;
 			default:

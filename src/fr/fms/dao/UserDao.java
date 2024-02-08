@@ -1,8 +1,11 @@
 package fr.fms.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+import fr.fms.entities.Stage;
 import fr.fms.entities.User;
 
 public class UserDao implements Dao<User>
@@ -22,6 +25,7 @@ public class UserDao implements Dao<User>
 			{
 				System.out.println("insert add OK");
 			}
+			users.add(new User(obj.getLogin(), obj.getPassword()));
 		}
 		catch (Exception e) 
 		{
@@ -37,9 +41,31 @@ public class UserDao implements Dao<User>
 	}
 
 	@Override
-	public void readAll() 
+	public ArrayList<User> readAll() 
 	{
+		String strSql = "SELECT * FROM T_Users"; 
 		
+		try(Statement statement = connection.createStatement())
+		{
+			try(ResultSet resultSet = statement.executeQuery(strSql))
+			{ 
+				users.clear();
+				while( resultSet.next())
+				{
+					int rsID = resultSet.getInt(1);
+					String rslogin = resultSet.getString(2);
+					String rspassword = resultSet.getString(3);
+					
+					users.add(new User(rsID , rslogin , rspassword));
+				}
+			}
+		} 
+		catch (Exception e) 
+		{
+			System.out.println(" erreur methode display article " + e );
+			e.printStackTrace();
+		}
+		return users;
 	}
 
 	@Override
@@ -86,5 +112,9 @@ public class UserDao implements Dao<User>
 			e.printStackTrace();
 		}
 	}
+	
+
+
+	
 	
 }

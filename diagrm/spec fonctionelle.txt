@@ -1,0 +1,38 @@
+
+Spécifications fonctionnelles
+
+en temps que utilisateur non connecter je peux : 
+	
+	- me connecter a mon compte
+	- aficher un article en particulier
+	- ajouter un article au panier
+	- afficher tout les articles
+	- ajouter plusieur article au panier
+	- voir mon panier
+	- retirer article de mon panier
+	- passer commande
+	- si non connecter demande de connection au compte
+	- si compte inconnue , creation du compte 
+	- si compte reconnu , validation de la commande 
+
+en temps qu'utilisateur connecter je peux :
+
+	- me connecter a mon compte
+	- aficher un article en particulier
+	- ajouter un article au panier
+	- afficher tout les articles
+	- ajouter plusieur article au panier
+	- voir mon panier
+	- retirer article de mon panier
+	- passer commande
+	- validation de la commande 
+	
+en temps qu'admin je peux :
+
+	- cree des article et ajouter en base
+	- supprimer article de la base
+	- voir les articles 
+	- voir les compte utilisateurs
+	- supprimer compte utilisateur
+	
+	

@@ -53,4 +53,9 @@ public class User
 		this.users = users;
 	}
 	
+	public String toString()
+	{
+		return " login : " + getLogin() + " pswd : " + getPassword();
+	}
+	
 }

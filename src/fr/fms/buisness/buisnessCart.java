@@ -4,10 +4,12 @@ import fr.fms.dao.*;
 import java.util.ArrayList;
 
 import fr.fms.entities.Stage;
+import fr.fms.entities.User;
 
 public class buisnessCart implements Buisness<Stage>
 {
 	ArticleDao artdao = new ArticleDao();
+	UserDao userdao = new UserDao();
 	
 	public ArrayList<Stage> cartList = new ArrayList<Stage>();
 	
@@ -29,9 +31,9 @@ public class buisnessCart implements Buisness<Stage>
 		return cartList;
 	}
 	
-	public void showStages()
+	public ArrayList<Stage> showStages()
 	{
-		artdao.readAll();
+		 return artdao.readAll();
 	}
 	
 	public Stage showStage(int id)
@@ -39,8 +41,18 @@ public class buisnessCart implements Buisness<Stage>
 		return artdao.readOne(id);
 	}
 
+	public ArrayList<User> showUsers()
+	{
+		 return userdao.readAll();
+	}
+	
 	public ArrayList<Stage> stageList ()
 	{
 		return artdao.stages;
+	}
+
+	public void userCreate( User obj)
+	{
+		userdao.create(obj);
 	}
 }
