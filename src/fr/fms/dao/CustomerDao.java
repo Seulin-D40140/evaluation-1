@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import fr.fms.entities.Customer;
 import fr.fms.entities.Stage;
+import fr.fms.entities.User;
 
 public class CustomerDao implements Dao<Customer>
 {
@@ -23,6 +24,7 @@ public class CustomerDao implements Dao<Customer>
 			ps.setString(3, obj.getEmail());
 			ps.setInt(4, obj.getPhone());
 			ps.setString(5, obj.getAddress());
+			customers.add(new Customer(obj.getName(), obj.getFirstName(), obj.getEmail(), obj.getPhone(), obj.getAddress()));
 			if( ps.executeUpdate() == 1)
 			{
 				System.out.println("insert add OK");

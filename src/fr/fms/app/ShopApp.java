@@ -42,7 +42,7 @@ public class ShopApp
 		
 		while (continue1)
 		{
-			if (loopCount == 0)
+			if (loopCount == 0)//boucle 1 instance
 			{
 				System.out.println("\n que voulez vous faire ? : \n" +
 					" 1 - afficher un article , 2 - ajouter plusieurs au article au panier , 3 - voir panier , 4 - quitter");
@@ -51,6 +51,7 @@ public class ShopApp
 				
 				while (isNumber == false || (Integer.parseInt(choice) > 4 || Integer.parseInt(choice) < 1))
 				{
+					//choice = verifyChoice(isNumber , choice , scan , 1 , 4);
 					System.out.println("\n que voulez vous faire ? : \n" +
 							" 1 - afficher un article , 2 - ajouter article au panier , 3 - voir panier , 4 - quitter");
 						choice = scan.nextLine();
@@ -290,8 +291,7 @@ public class ShopApp
 							String email = null;
 							String adress = null;
 							String phone = null;
-							String logincreate = null;
-							String passwordcreate = null;
+							
 							System.out.println("entrez votre nom : ");
 							name = scan.nextLine();
 							System.out.println("entrez votre premnom : ");
@@ -305,9 +305,9 @@ public class ShopApp
 							int parsePhone = Integer.parseInt(phone);
 							buisness.createInfos(new Customer(name, firstname, email, parsePhone, adress));
 							System.out.println("\n entrez votre login : ");
-							logincreate = scan.nextLine();
+							String logincreate = scan.nextLine();
 							System.out.println("entrez votre mot dde passe : ");
-							passwordcreate = scan.nextLine();
+							String passwordcreate = scan.nextLine();
 							buisness.userCreate(new User(logincreate, passwordcreate));
 							break;
 						default:
@@ -324,6 +324,7 @@ public class ShopApp
 						break;
 					}
 				}
+				continueCart = true;
 				
 				break;
 			case 4 :
@@ -347,8 +348,9 @@ public class ShopApp
 		scan.close();
 	}
 	
-//	public void verifyChoice( boolean isNumber , String choice , Scanner scan , int min , int max )
-//	{
+//	public String verifyChoice( boolean isNumber , String choice , Scanner scan , int min , int max )
+//	{ 
+//		String choiceVerif = choice;
 //		while (isNumber == false || (Integer.parseInt(choice) > max || Integer.parseInt(choice) < min))
 //		{
 //			System.out.println("\n que voulez vous faire ? : \n" +
@@ -356,6 +358,7 @@ public class ShopApp
 //				choice = scan.nextLine();
 //				isNumber = choice.chars().allMatch(Character::isDigit);
 //		}
+//		return choiceVerif;
 //	}
 }
 

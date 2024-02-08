@@ -26,6 +26,7 @@ public class UserDao implements Dao<User>
 				System.out.println("insert add OK");
 			}
 			users.add(new User(obj.getLogin(), obj.getPassword()));
+			
 		}
 		catch (Exception e) 
 		{
@@ -113,8 +114,27 @@ public class UserDao implements Dao<User>
 		}
 	}
 	
-
-
-	
-	
+//	public void asiociate(int id)
+//	{
+//		String str = "update t_Users set idPerson=? where idUser=?;";
+//		
+//		try(PreparedStatement ps = connection.prepareStatement(str))
+//		{
+//			for(int i = 0 ; i < users.size() ; i++)
+//			{
+//				ps.setInt(1, users.get(i).getIdUser());
+//				ps.setInt(2, users.get(i).getIdUser());
+//			}
+//			
+//			if( ps.executeUpdate() == 1)
+//			{
+//				System.out.println("insert asociate OK");
+//			}
+//		}
+//		catch (Exception e) 
+//		{
+//			System.out.println(" erreur methode add stage " + e );
+//			e.printStackTrace();
+//		}
+//	}
 }
